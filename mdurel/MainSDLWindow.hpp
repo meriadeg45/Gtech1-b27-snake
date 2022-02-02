@@ -1,6 +1,4 @@
-#ifndef MAINSDLWINDOW_HPP
-#define MAINSDLWINDOW_HPP
-
+#pragma once
 #include <SDL2/SDL.h>
 #include <stdio.h>
 
@@ -17,4 +15,3 @@ private:
   SDL_Window *window;
   SDL_Renderer *renderer;
 };
-#endif
