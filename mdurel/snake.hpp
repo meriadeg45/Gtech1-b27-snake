@@ -6,6 +6,7 @@ public:
   ~Snake();
   Move(int dir);
   Eat();
+  EatBack();
 
 private:
   Segment *head;
@@ -14,7 +15,7 @@ private:
 
 class Segment {
 public:
-  Segment();
+  Segment(int x_, int y_);
   ~Segment();
   
   int GetX();
@@ -22,7 +23,8 @@ public:
   void SetX(int);
   void SetY(int);
 
-  ... GetNext();
+  Segment GetNext();
+  void SetNext(Segment next_);
 
 private:
   int x, y;
