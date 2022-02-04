@@ -1,32 +1,34 @@
 #pragma once
 
-class Snake {
+class Snake
+{
 public:
   Snake();
   ~Snake();
-  Move(int dir);
-  Eat();
-  EatBack();
+  void Move(int dir);
+  void Eat();
+  void EatBack();
 
 private:
   Segment *head;
   Segment *tail;
 };
 
-class Segment {
+class Segment
+{
 public:
-  Segment(int x_, int y_);
+  Segment(int x, int y);
   ~Segment();
-  
+
   int GetX();
   int GetY();
   void SetX(int);
   void SetY(int);
 
-  Segment GetNext();
-  void SetNext(Segment next_);
+  Segment *GetNext();
+  void SetNext(Segment *next);
 
 private:
   int x, y;
   Segment *next;
-}
+};

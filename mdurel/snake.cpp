@@ -1,14 +1,14 @@
 #include <SDL2/SDL.h>
 #include "snake.hpp"
 
-Snake::Move(int dir)
+void Snake::Move(int dir)
 {
 }
 
-Snake::Eat()
+void Snake::Eat()
 {
-  Segment newHead = new Segment(10, 10);
-  Segment temp;
+  Segment *newHead = new Segment(10, 10);
+  Segment *temp;
 
   if (this->head == NULL)
   {
@@ -18,12 +18,23 @@ Snake::Eat()
 
   temp = this->head;
   this->head = newHead;
-  newHead.SetNext(temp);
+  newHead->SetNext(temp);
 }
 
-Snake::EatBack()
+void Snake::EatBack()
 {
-  
+  Segment *newBack = new Segment(10, 10);
+  Segment *temp;
+
+  if (this->tail == NULL)
+  {
+    this->tail = newBack;
+    return;
+  }
+
+  temp = this->tail;
+  this->tail = newBack;
+  newBack->SetNext(temp);
 }
 
 Segment::Segment(int x_, int y_)
@@ -47,12 +58,12 @@ int Segment::GetY()
   return this->y;
 }
 
-Segment Segment::GetNext()
+Segment *Segment::GetNext()
 {
   return this->next;
 }
 
-void Segment::SetNext(Segment next_)
+void Segment::SetNext(Segment *next_)
 {
   this->next = next_;
 }
@@ -69,7 +80,7 @@ void Segment::SetY(int y_)
 
 void code()
 {
-  Segment seg;
+  Segment *seg;
   // seg.x = 5; // Interdit
-  seg.SetCoords(5, 6); // OK
-}
+  seg->SetCoords(5, 6); // OK
+}; 
