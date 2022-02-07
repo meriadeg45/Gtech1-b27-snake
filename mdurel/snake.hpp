@@ -1,19 +1,5 @@
 #pragma once
 
-class Snake
-{
-public:
-  Snake();
-  ~Snake();
-  void Move(int dir);
-  void Eat();
-  void EatBack();
-
-private:
-  Segment *head;
-  Segment *tail;
-};
-
 class Segment
 {
 public:
@@ -31,4 +17,20 @@ public:
 private:
   int x, y;
   Segment *next;
+};
+
+class Snake
+{
+public:
+  Snake();
+  ~Snake();
+  void Move(int dir);
+  void Eat();
+  void EatBack();
+
+  Segment* getHead();
+
+private:
+  Segment *head;
+  Segment *tail;
 };

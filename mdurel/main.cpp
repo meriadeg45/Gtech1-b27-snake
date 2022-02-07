@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include "MainSDLWindow.hpp"
+#include "snake.hpp"
 #include "constants.h"
 int dir = DOWN;
 int keyboard()
@@ -33,10 +34,13 @@ int main()
   rectangle.w = 32;
   rectangle.h = 32;
 
+  Snake *snake = new Snake();
+
   do
   {
     keyboard();
-    switch (dir)
+    snake->Move(dir);
+    /*switch (dir)
     {
     case UP:
       rectangle.y--;
@@ -50,12 +54,21 @@ int main()
     case RIGHT:
       rectangle.x++;
       break;
-    }
+    }*/
 
     SDL_SetRenderDrawColor(win.GetRenderer(), 0, 0, 0, 255);
     SDL_RenderClear(win.GetRenderer());
+
     SDL_SetRenderDrawColor(win.GetRenderer(), 255, 0, 0, 255);
-    SDL_RenderFillRect(win.GetRenderer(), &rectangle);
+    Segment* s = snake->getHead();
+    while ( s )
+    {
+      SDL_Rect r = { s->GetX() * GRIDSIZE, s->GetY() * GRIDSIZE, GRIDSIZE, GRIDSIZE };
+      SDL_RenderFillRect(win.GetRenderer(), &r);
+
+      s = s->GetNext();
+    }
+
     SDL_RenderPresent(win.GetRenderer());
 
     SDL_Event e;
@@ -67,6 +80,6 @@ int main()
       }
     }
 
-    SDL_Delay(20);
+    SDL_Delay(50);
   } while (1);
 }

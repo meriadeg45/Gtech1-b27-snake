@@ -1,8 +1,35 @@
 #include <SDL2/SDL.h>
 #include "snake.hpp"
 
+#include "constants.h"
+
+Snake::Snake()
+{
+  this->head = NULL;
+  this->tail = NULL;
+
+  Eat();
+  printf("%d\n", head->GetX());
+}
+
 void Snake::Move(int dir)
 {
+  int x, y; // Récupère les x,y de head
+  switch (dir)
+  {
+  case UP:
+    this->head->SetY( this->head->GetY() - 1 );
+    break;
+  case DOWN:
+    this->head->SetY( this->head->GetY() + 1 );
+    break;
+  case LEFT:
+    this->head->SetX( this->head->GetX() - 1 );
+    break;
+  case RIGHT:
+    this->head->SetX( this->head->GetX() + 1 );
+    break;
+  }
 }
 
 void Snake::Eat()
@@ -35,6 +62,11 @@ void Snake::EatBack()
   temp = this->tail;
   this->tail = newBack;
   newBack->SetNext(temp);
+}
+
+Segment* Snake::getHead()
+{
+  return head;
 }
 
 Segment::Segment(int x_, int y_)
@@ -78,9 +110,9 @@ void Segment::SetY(int y_)
   this->y = y_;
 }
 
-void code()
-{
-  Segment *seg;
-  // seg.x = 5; // Interdit
-  seg->SetCoords(5, 6); // OK
-}; 
+// void code()
+// {
+//   Segment *seg;
+//   // seg.x = 5; // Interdit
+//   seg->SetCoords(5, 6); // OK
+// }; 
