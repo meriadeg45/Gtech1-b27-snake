@@ -14,22 +14,34 @@ Snake::Snake()
 
 void Snake::Move(int dir)
 {
-  int x, y; // Récupère les x,y de head
+  // On calcul dx, dy;
+  int dx=0, dy=0;
   switch (dir)
   {
   case UP:
-    this->head->SetY( this->head->GetY() - 1 );
+    dy = -1;
     break;
   case DOWN:
-    this->head->SetY( this->head->GetY() + 1 );
+    dy = 1;
     break;
   case LEFT:
-    this->head->SetX( this->head->GetX() - 1 );
+    dx = -1;
     break;
   case RIGHT:
-    this->head->SetX( this->head->GetX() + 1 );
+    dx = 1;
     break;
   }
+
+  // Chaque Segment passe ses coordonnées à son "this->next":
+  ???
+
+  // On calcule les nouvelles coordonnées:
+  int new_x = this->head->GetX() + ??;
+  int new_y = this->head->GetY() + ??????;
+
+  // On met à jour les coordonnées de head:
+  ???
+
 }
 
 void Snake::Eat()
