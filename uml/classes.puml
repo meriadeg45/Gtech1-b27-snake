@@ -38,6 +38,7 @@ class Segment {
 	-next : Segment*
 	+GetX() : int
 	+GetY() : int
+	+checkCollision(Segment* head) : int
 	-x : int
 	-y : int
 	+SetNext(Segment* next) : void
@@ -54,6 +55,8 @@ class Snake {
 	+getHead() : Segment*
 	-head : Segment*
 	-tail : Segment*
+	-appleEatten : int
+	+getNBApple() : int
 	+CheckFruit() : void
 	+Eat() : void
 	+Move(int dir) : void

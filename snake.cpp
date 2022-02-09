@@ -84,7 +84,8 @@ int Snake::getNBApple()
 
 void Snake::Eat()
 {
-  
+  printf("SCORE: %d\n", appleEatten);
+
   tail=tail->AddSegment(tail);
 
 }

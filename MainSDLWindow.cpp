@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+
 #include "MainSDLWindow.hpp"
 #define IsGameRunning = 1
 
@@ -45,7 +46,6 @@ int MainSDLWindow::Init(const char *Bernard, int width, int height)
     }
     else
     {
-        printf("Pas d'erreurs");
         return EXIT_SUCCESS;
     }
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
