@@ -1,4 +1,5 @@
 #pragma once
+#include "fruit.hpp"
 
 class Segment
 {
@@ -10,6 +11,7 @@ public:
   int GetY();
   void SetX(int);
   void SetY(int);
+  Segment *AddSegment(Segment *tail);
 
   Segment *GetNext();
   void SetNext(Segment *next);
@@ -26,11 +28,13 @@ public:
   ~Snake();
   void Move(int dir);
   void Eat();
-  void EatBack();
+  void CheckFruit();
 
+  Fruit *GetFruit();
   Segment* getHead();
 
 private:
   Segment *head;
   Segment *tail;
+  Fruit *fruit;
 };

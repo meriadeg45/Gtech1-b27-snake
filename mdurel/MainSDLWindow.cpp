@@ -31,7 +31,7 @@ int MainSDLWindow::Init(const char *Bernard, int width, int height)
         printf("Erreur d'Initialisation de la vidéo %s", SDL_GetError());
         return EXIT_FAILURE;
     }
-    this->window = SDL_CreateWindow(Bernard, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 600, 600, 0);
+    this->window = SDL_CreateWindow(Bernard, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_RESIZABLE);
     if (this->window == NULL)
     {
         printf("Erreur de l'affichage de la fenêtre %s", SDL_GetError());

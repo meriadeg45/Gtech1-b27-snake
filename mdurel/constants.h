@@ -1,6 +1,8 @@
 #pragma once
 
-#define GRIDSIZE 32
+#define PIXELS 32
+#define SQUARES 20
+#define SCREEN_SIZE (PIXELS * SQUARES)
 
 #define UP -1
 #define DOWN 1

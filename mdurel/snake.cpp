@@ -8,7 +8,9 @@ Snake::Snake()
   this->head = NULL;
   this->tail = NULL;
 
-  Eat();
+  head = new Segment(10, 10);
+  tail = head;
+  fruit = new Fruit();
   printf("%d\n", head->GetX());
 }
 
@@ -37,6 +39,7 @@ void Snake::Move(int dir)
     break;
   }
 
+
   // Chaque Segment passe ses coordonnées à son "this->next":
   Segment* s = this->head;
   int x = s->GetX(), y = s->GetY();
@@ -63,37 +66,25 @@ void Snake::Move(int dir)
   this->head->SetY(new_y);
 }
 
+void Snake::CheckFruit(){
+    printf("Head: %d, %d\n", head->GetX(), head->GetY());
+    printf("Fruit: %d, %d\n", fruit->getX(), fruit->getY());
+
+   if (head->GetX() == fruit->getX() && head->GetY() == fruit->getY()){
+      printf("Detct fruit\n");
+      Eat();
+      fruit->setRandomCoord();
+   }
+}
+
 void Snake::Eat()
 {
-  Segment *newHead = new Segment(10, 10);
-  Segment *temp;
+  
+  tail=tail->AddSegment(tail);
 
-  if (this->head == NULL)
-  {
-    this->head = newHead;
-    return;
-  }
-
-  temp = this->head;
-  this->head = newHead;
-  newHead->SetNext(temp);
 }
 
-void Snake::EatBack()
-{
-  Segment *newBack = new Segment(10, 10);
-  Segment *temp;
-
-  if (this->tail == NULL)
-  {
-    this->tail = newBack;
-    return;
-  }
-
-  temp = this->tail;
-  this->tail = newBack;
-  newBack->SetNext(temp);
-}
+Fruit *Snake::GetFruit(){return fruit;}
 
 Segment* Snake::getHead()
 {
@@ -111,6 +102,14 @@ Segment::~Segment()
 {
   if (next)
     delete this->next;
+}
+
+Segment *Segment::AddSegment(Segment *tail){
+  Segment *temp = new Segment(tail->GetX()-32, tail->GetY()-32);
+  tail->SetNext(temp);
+  tail = temp;
+
+  return tail;
 }
 
 int Segment::GetX()
