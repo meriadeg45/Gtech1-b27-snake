@@ -12,6 +12,11 @@ Snake::Snake()
   printf("%d\n", head->GetX());
 }
 
+Snake::~Snake()
+{
+  delete this->head;
+}
+
 void Snake::Move(int dir)
 {
   // On calcul dx, dy;
@@ -33,15 +38,29 @@ void Snake::Move(int dir)
   }
 
   // Chaque Segment passe ses coordonnées à son "this->next":
-  ???
+  Segment* s = this->head;
+  int x = s->GetX(), y = s->GetY();
+  while (s->GetNext())
+  {
+    int xnext = s->GetNext()->GetX();
+    int ynext = s->GetNext()->GetY();
+
+    s->GetNext()->SetX(x);
+    s->GetNext()->SetY(y);
+
+    x = xnext;
+    y = ynext;
+
+    s = s->GetNext();
+  }
 
   // On calcule les nouvelles coordonnées:
-  int new_x = this->head->GetX() + ??;
-  int new_y = this->head->GetY() + ??????;
+  int new_x = this->head->GetX() + dx;
+  int new_y = this->head->GetY() + dy;
 
   // On met à jour les coordonnées de head:
-  ???
-
+  this->head->SetX(new_x);
+  this->head->SetY(new_y);
 }
 
 void Snake::Eat()
@@ -90,6 +109,8 @@ Segment::Segment(int x_, int y_)
 
 Segment::~Segment()
 {
+  if (next)
+    delete this->next;
 }
 
 int Segment::GetX()
