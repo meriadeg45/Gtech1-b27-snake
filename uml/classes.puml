@@ -1,0 +1,91 @@
+@startuml
+
+
+
+
+
+/' Objects '/
+
+class Fruit {
+	+Fruit()
+	+getX() : int
+	+getY() : int
+	-x : int
+	-y : int
+	+debugPrint() : void
+	+printFruit(SDL_Renderer* renderer) : void
+	+setRandomCoord() : void
+	+setX(int x) : void
+	+setY(int y) : void
+}
+
+
+class MainSDLWindow {
+	+MainSDLWindow()
+	+~MainSDLWindow()
+	+GetRenderer() : SDL_Renderer*
+	-renderer : SDL_Renderer*
+	-window : SDL_Window*
+	+Init(const char* Bernard, int width, int height) : int
+}
+
+
+class Segment {
+	+Segment(int x, int y)
+	+~Segment()
+	+AddSegment(Segment* tail) : Segment*
+	+GetNext() : Segment*
+	-next : Segment*
+	+GetX() : int
+	+GetY() : int
+	-x : int
+	-y : int
+	+SetNext(Segment* next) : void
+	+SetX(int) : void
+	+SetY(int) : void
+}
+
+
+class Snake {
+	+Snake()
+	+~Snake()
+	+GetFruit() : Fruit*
+	-fruit : Fruit*
+	+getHead() : Segment*
+	-head : Segment*
+	-tail : Segment*
+	+CheckFruit() : void
+	+Eat() : void
+	+Move(int dir) : void
+}
+
+
+
+
+
+/' Inheritance relationships '/
+
+
+
+
+/' Aggregation relationships '/
+
+.Segment o-- .Segment
+
+
+.Snake o-- .Fruit
+
+
+.Snake "2" o-- .Segment
+
+
+
+
+
+
+/' Nested objects '/
+
+
+
+@enduml
+
