@@ -7,6 +7,7 @@ Snake::Snake()
 {
   this->head = NULL;
   this->tail = NULL;
+  this->appleEatten = 0;
 
   head = new Segment(10, 10);
   tail = head;
@@ -70,9 +71,15 @@ void Snake::CheckFruit(){
    
 
    if (head->GetX() == fruit->getX() && head->GetY() == fruit->getY()){
+     this->appleEatten += 1;
       Eat();
       fruit->setRandomCoord();
    }
+}
+
+int Snake::getNBApple()
+{
+  return this->appleEatten;
 }
 
 void Snake::Eat()

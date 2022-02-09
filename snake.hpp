@@ -32,6 +32,8 @@ public:
   void Eat();
   void CheckFruit();
 
+  int getNBApple();
+
   Fruit *GetFruit();
   Segment* getHead();
 
@@ -39,5 +41,5 @@ private:
   Segment *head;
   Segment *tail;
   Fruit *fruit;
-  int leght;
+  int appleEatten;
 };

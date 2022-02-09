@@ -12,7 +12,7 @@ int lose;
 int game_paused = 1;
 int dir = 0;
 
-void keyboard()
+void keyboard(Snake *snake)
 {
   const Uint8 *keystates = SDL_GetKeyboardState(NULL);
   if (keystates[SDL_SCANCODE_UP] && dir != DOWN)
@@ -35,6 +35,8 @@ void keyboard()
   {
     game_paused = !game_paused;  
   }
+  if (keystates[SDL_SCANCODE_TAB])
+    printf("SCORE: %d\n", snake->getNBApple());
 }
 
 int main()
@@ -49,7 +51,7 @@ int main()
   Snake *snake = new Snake();
   do
   {
-    keyboard();
+    keyboard(snake);
     if (dir != 0) game_paused = 0;
     if (game_paused == 0) {
       snake->Move(dir);
