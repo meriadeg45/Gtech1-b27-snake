@@ -11,7 +11,7 @@ Snake::Snake()
   head = new Segment(10, 10);
   tail = head;
   fruit = new Fruit();
-  printf("%d\n", head->GetX());
+  
 }
 
 Snake::~Snake()
@@ -67,11 +67,9 @@ void Snake::Move(int dir)
 }
 
 void Snake::CheckFruit(){
-    printf("Head: %d, %d\n", head->GetX(), head->GetY());
-    printf("Fruit: %d, %d\n", fruit->getX(), fruit->getY());
+   
 
    if (head->GetX() == fruit->getX() && head->GetY() == fruit->getY()){
-      printf("Detct fruit\n");
       Eat();
       fruit->setRandomCoord();
    }
@@ -142,9 +140,13 @@ void Segment::SetY(int y_)
   this->y = y_;
 }
 
-// void code()
-// {
-//   Segment *seg;
-//   // seg.x = 5; // Interdit
-//   seg->SetCoords(5, 6); // OK
-// }; 
+int Segment::checkCollision(Segment *head){
+  if (head->x == this->next->x && head->y == this->next->y){
+    return 1;
+  }
+  else{
+    if(next->GetNext() != NULL){
+      this->next->checkCollision(head);
+    }
+  }
+}

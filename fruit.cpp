@@ -40,7 +40,7 @@ void Fruit::setRandomCoord()
     int randy = rand() % (SQUARES - 1) + 1;
     this->x = randx;
     this->y = randy;
-    printf("Fruit: %d : %d\n", x, y);
+    
 
 }
 
@@ -55,9 +55,4 @@ void Fruit::printFruit(SDL_Renderer *renderer)
     Fruit.y = this->y;
 
     SDL_RenderFillRect(renderer, &Fruit);
-}
-
-void Fruit::debugPrint()
-{
-    printf("X: %d\nY: %d\n", this->x, this->y);
-}
+};

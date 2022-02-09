@@ -16,6 +16,8 @@ public:
   Segment *GetNext();
   void SetNext(Segment *next);
 
+  int checkCollision(Segment *head);
+
 private:
   int x, y;
   Segment *next;
@@ -37,4 +39,5 @@ private:
   Segment *head;
   Segment *tail;
   Fruit *fruit;
+  int leght;
 };

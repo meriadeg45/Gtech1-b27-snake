@@ -5,14 +5,16 @@
 #include "fruit.hpp"
 #include "constants.h"
 
+int lose;
 
 
-int dir = DOWN;
 
-int keyboard()
+int game_paused = 1;
+int dir = 0;
+
+void keyboard()
 {
   const Uint8 *keystates = SDL_GetKeyboardState(NULL);
-
   if (keystates[SDL_SCANCODE_UP] && dir != DOWN)
   {
     dir = UP;
@@ -29,7 +31,10 @@ int keyboard()
   {
     dir = RIGHT;
   }
-  return 0;
+  if (keystates[SDL_SCANCODE_SPACE])
+  {
+    game_paused = !game_paused;  
+  }
 }
 
 int main()
@@ -42,16 +47,30 @@ int main()
 
   srand(time(NULL));
   Snake *snake = new Snake();
-
   do
   {
     keyboard();
-    snake->Move(dir);
-    snake->CheckFruit();
+    if (dir != 0) game_paused = 0;
+    if (game_paused == 0) {
+      snake->Move(dir);
+      snake->CheckFruit();
 
+    if(snake->getHead()->GetNext() != NULL){
+      lose = snake ->getHead()->checkCollision(snake->getHead());
+      if (lose == 1){
+        break;
+      }
+    }
+
+      int xs = snake->getHead()->GetX();
+      int ys = snake->getHead()->GetY();
+      if ((xs < 0) || (xs >= SQUARES) || (ys < 0) || (ys >= SQUARES))
+        exit(0);
+    }
+
+    // dessiner snake:
     SDL_SetRenderDrawColor(win.GetRenderer(), 0, 0, 0, 255);
     SDL_RenderClear(win.GetRenderer());
-
     SDL_SetRenderDrawColor(win.GetRenderer(), 255, 0, 0, 255);
     Segment* s = snake->getHead();
     while ( s )
@@ -59,18 +78,14 @@ int main()
       rectangle.x = s->GetX() * PIXELS;
       rectangle.y = s->GetY() * PIXELS;
       SDL_RenderFillRect(win.GetRenderer(), &rectangle);
-
       s = s->GetNext();
     }
 
-    //dessiner fruit  
-    
+    //dessiner fruit
     rectangle.x = snake->GetFruit()->getX() * PIXELS;
     rectangle.y = snake->GetFruit()->getY() * PIXELS;
     SDL_SetRenderDrawColor(win.GetRenderer(), 0, 255, 0, 255);
     SDL_RenderFillRect(win.GetRenderer(), &rectangle);
-
-    SDL_RenderPresent(win.GetRenderer());
 
     SDL_Event e;
     while (SDL_PollEvent(&e))
@@ -81,6 +96,7 @@ int main()
       }
     }
 
-    SDL_Delay(50);
+  SDL_RenderPresent(win.GetRenderer());
+  SDL_Delay(70);
   } while (1);
 }
